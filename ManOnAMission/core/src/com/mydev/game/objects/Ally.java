@@ -3,6 +3,7 @@ package com.mydev.game.objects;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
+import com.mydev.game.ManOnAMissionGame;
 import com.mydev.game.screens.GameScreen;
 
 public class Ally extends GameObject{
@@ -51,18 +52,42 @@ public class Ally extends GameObject{
 	@Override
 	public void move(float delta) {
 		Vector2 direction = new Vector2(findTarget().x - position.x, findTarget().y - position.y);
-		direction.limit(GameScreen.ENEMYSPEED * delta);
+		direction.limit(GameScreen.ALLYSPEED * delta);
 		position.add(direction);		
 	}
 	
 	public Vector2 findTarget() {
 		Vector2 enemyPos = GameObjectManager.getInstance().getEnemy().getPosition();
-		if (enemyPos.dst(this.position) < GameScreen.ENEMYSPEED * 2) {
-			Vector2 out = new Vector2(this.position.x - (enemyPos.x - this.position.x), this.position.y - (enemyPos.y - this.position.y));
-			return out;
+		
+		Vector2 out;
+		
+		if (enemyPos.dst(this.position) < GameScreen.ENEMYSPEED * 4) {
+			float x = this.position.x - (enemyPos.x - this.position.x);
+			float y = this.position.y - (enemyPos.y - this.position.y);
+			
+			if (x < texture.getWidth() / 2) {
+				x = texture.getWidth() / 2;
+			}
+					
+			if (x > ManOnAMissionGame.WIDTH - texture.getWidth() / 2) {
+				x = ManOnAMissionGame.WIDTH - texture.getWidth() / 2;
+			}
+			
+			if (y < texture.getHeight() / 2) {
+				y = texture.getHeight() / 2;
+			}
+			
+			if (y > ManOnAMissionGame.HEIGHT - texture.getHeight() / 2) {
+				y = ManOnAMissionGame.HEIGHT - texture.getHeight() / 2;
+			}
+			
+			out = new Vector2(x, y);
+			
 		} else {
-			return target;
+			out = target;
 		}
+		
+		return out;
 		
 	}
 

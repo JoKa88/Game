@@ -6,8 +6,8 @@ import com.mydev.game.screens.MenuScreen;
 
 public class ManOnAMissionGame extends Game {
 	
-	public static final int WIDTH = 480;
-	public static final int HEIGHT = 720;
+	public static final int WIDTH = 1600;
+	public static final int HEIGHT = 900;
 		
 	public SpriteBatch batch;
 	

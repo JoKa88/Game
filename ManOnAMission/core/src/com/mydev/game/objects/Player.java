@@ -3,6 +3,7 @@ package com.mydev.game.objects;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
+import com.mydev.game.ManOnAMissionGame;
 import com.mydev.game.screens.GameScreen;
 
 public class Player extends GameObject{
@@ -55,6 +56,23 @@ public class Player extends GameObject{
 	}
 	
 	public void setTarget(Vector2 target) {
+		if (target.x < texture.getWidth() / 2) {
+			target.x = texture.getWidth() / 2;
+		}
+				
+		if (target.x > ManOnAMissionGame.WIDTH - texture.getWidth() / 2) {
+			target.x = ManOnAMissionGame.WIDTH - texture.getWidth() / 2;
+		}
+		
+		if (target.y < texture.getHeight() / 2) {
+			target.y = texture.getHeight() / 2;
+		}
+		
+		if (target.y > ManOnAMissionGame.HEIGHT - texture.getHeight() / 2) {
+			target.y = ManOnAMissionGame.HEIGHT - texture.getHeight() / 2;
+		}
+		
+		
 		this.target = target;		
 	}
 
